@@ -1,0 +1,247 @@
+{% extends 'staff/staff_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+@keyframes example {
+        0%   { left:0px; top:0px;}
+  25%  {background-color:rgb(134, 134, 131); }
+
+}
+#coffee{
+    color: rgb(194, 127, 4);
+    border: 1px solid rgb(194, 127, 4);
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+#coffee:hover{
+    color: white;
+    background-color: rgb(185, 123, 6);
+
+}
+
+#div1:hover {
+    position: relative;
+  animation-name: example;
+  animation-duration: 2s;
+}
+
+
+.card1{
+    width: 100%;
+    height: 250px;
+    padding: 2rem 1rem;
+    background: #fff;
+    position: relative;
+    box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
+    transition: 0.5s ease-in-out;
+}
+.card1::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,rgba(67, 82, 80, 0.5),rgb(39, 41, 22));
+    z-index: 2;
+    transition: 0.5s all;
+    opacity: 0;
+}
+.card1:hover::before{
+    opacity: 1;
+}
+.card1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.card1 .info{
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s all;
+
+}
+.card1:hover .info{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+
+
+
+
+/* .............. button........................ */
+.bt {
+  border-radius: 4px;
+  background-color: #dd9a08;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.bt span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.bt span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.bt:hover span {
+  padding-right: 25px;
+}
+
+.bt:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+
+
+
+
+
+/* ..............images div.................... */
+.contain {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 250px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ba630083;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+}
+
+.contain:hover .overlay {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+
+
+.story {
+  /* width: 100px;
+  height: 100px;
+  background: red; */
+  transition: width 2s, height 2s, transform 2s;
+}
+
+.story:hover {
+  /* width: 300px;
+  height: 300px; */
+  transform: rotate(360deg);
+}
+    
+
+    
+</style>
+
+
+<div class="row">
+  <div class="col-sm-12 col-lg-12 col-md-12">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active " data-bs-interval="2000">
+          <div class="carousel-caption d-none d-md-block mb-5" >
+            <!-- <div class="p-4" style="background-color: rgba(32, 32, 32, 0.534);"> -->
+              <h1 class="mt-3" style="font-family:cursive;color: rgb(221, 145, 5);">Tasty And Delicious Food</h1>
+            <h3 class="pb-3" style="font-family: cursive;">CREAMY HOT AND READY TO SERVE.</h3>
+            <a href="" class="btn btn-light mb-5" ><b>Book a Table</b></a>
+              <a href="" class="btn btn-light mb-5" ><b>Order Now</b></a>
+            <!-- </div> -->
+              
+  
+            </div>
+          <img src="https://www.myweeklypreview.com.au/wp-content/uploads/2019/07/CoverStory558-1.jpg"  class="d-block w-100" alt="...">
+          
+        </div>
+        <div class="carousel-item" data-bs-interval="2000" >
+          <div class="carousel-caption d-none d-md-block mb-5 ">
+              <h1 style="font-family:cursive">Tasty And Delicious Food</h1>
+              <h5 style="color: rgb(248, 247, 244);font-family: cursive;">Some representative placeholder content for the first slide.</h5>
+              <a href="" class="btn btn-light mb-5" ><b>Book a Table</b></a>
+  
+          </div>
+          <img src="https://littlebsale.co.uk/wp-content/uploads/sites/153/2022/11/CoffeeEvent.jpg"  class="d-block w-100" alt="..." >
+        </div>
+        <div class="carousel-item" data-bs-interval="2000" >
+          <div class="carousel-caption d-none d-md-block mb-5">
+              <h1 style="font-family:cursive;color: #c08507;">Tasty And Delicious Food</h1>
+              <h5 style="font-family: cursive;color: white;">Some representative placeholder content for the first slide.</h5>
+              <a href="" class="btn btn-light mb-5" ><b>Book a Table</b></a>
+  
+            </div>
+            <img src="https://asset.snoonu.com/test/headerimage_new/CmqwLBXVLd.jpg"  class="d-block w-100" alt="..." >
+  
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  
+  </div>
+</div>
+
+{% endblock %}
