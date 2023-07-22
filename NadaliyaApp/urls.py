@@ -22,6 +22,8 @@ urlpatterns = [
 
     path('artist_registration/',views.artist_registration,name='artist_registration'),
     path('index_artist_confirmation/<int:user_id>/',views.index_artist_confirmation,name='index_artist_confirmation'),
+    path('profile_user_creation/',views.profile_user_creation,name='profile_user_creation'),
+    
     path('user_home/',views.user_home,name='user_home'),
 
     

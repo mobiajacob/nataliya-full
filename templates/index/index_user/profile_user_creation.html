@@ -1,5 +1,21 @@
+{% extends 'index/base.html' %}
+{% load static %}
+
+{% block content %}
 
 <style>
+  body {
+
+    background-image: url(https://media.istockphoto.com/id/1206800961/photo/online-shopping-and-payment-man-using-tablet-with-shopping-cart-icon-digital-marketing.jpg?b=1&s=612x612&w=0&k=20&c=mwZYTXRUffNG-igVygp49KPbBT4Dp0va1MxomnP3j9M=);
+    width: 100%;
+ 
+    background-position: center;
+    background-size: cover;
+   
+    position: relative;
+
+
+    }
 
     html {
         background: rgb(0, 0, 0);
@@ -29,18 +45,18 @@
           box-shadow: none;
         }
         100% {
-          box-shadow: 0px 0px 50px  #c21b98;
+          box-shadow: 0px 0px 50px  black;
         }
       }
       
       @keyframes continuous-glow {
         0% {
-          box-shadow: 0 0 5px rgba(206, 60, 177, 0.39),
-            inset 0 0 5px rgba(129, 27, 105, 0.356), 0 2px 0 #000;
+          box-shadow: 0 0 5px #142023,
+            inset 0 0 5px #142023, 0 2px 0 #000;
         }
         100% {
-          box-shadow: 0 0 20px rgba(183, 38, 159, 0.6),
-            inset 0 0 10px rgba(173, 55, 143, 0.4), 0 2px 0 #000;
+          box-shadow: 0 0 20px #5e6e79,
+            inset 0 0 10px #5e6e79
         }
       }
       
@@ -56,7 +72,7 @@
       }
       
       .form-container {
-        margin: auto;
+        margin: 0 auto;
         width: 90%;
       }
       
@@ -120,7 +136,7 @@
       select,
       input,
       .textarea-div textarea {
-        background: #1b1a1a;
+        background: #142023;
         color: rgb(255, 229, 195);
       }
       
@@ -129,7 +145,7 @@
         font-size: 28px;
         padding: 0;
         margin-bottom: 1.25em;
-        color:  #c21b98;
+        color:  #5e6e79;
       }
       
       label {
@@ -178,7 +194,7 @@
       
       .btn-glow {
         animation: 0.5s ease-out 0s 1 blur-load;
-        border-radius: 2em;
+        border-radius: 1em;
         color: white;
         transition: 0.4s;
       }
@@ -186,9 +202,16 @@
       .btn-glow:hover {
         box-shadow: 0px 0px 10px #f0860c;
       }
+      .form-btn {
+        padding-left: 20px;
+        padding-right: 20px;
+        background: #142023;
+        color: white;
+      }
       
       .form-btn:hover {
-        background: #c21b98;
+        background: #5e6e79;
+        color: white;
       }
       
       .form-container input:focus,
@@ -225,9 +248,9 @@
       
 </style>
 <section class="form-container">
-    <form action = "{% url 'artist_profile_view' %}" method = 'POST'>
+    <form action = "{% url 'profile_user_creation' %}" method = "POST" enctype="multipart/form-data">
        {% csrf_token %}
-    <h1 class="form-header">USER CREATION</h1>
+    <h1 class="form-header">ARTIST CREATION</h1>
     <div class="form">
       <div class="form-item form-item1">
         <label for="firstname">First Name</label>
@@ -265,77 +288,28 @@
         <input id="dob" type="date" name="date_of_birth" value="{{user.date_of_birth| date:'Y-m-d'}}"/>
       </div>
 
-      <div class="form-item form-item4">
-        <label for="marital_status">Marital Status</label>
-        <select name="marital_status">
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Divorced">Divorced</option>  
-         
-        </select></div>
 
         <div class="form-item form-item4">
-            <label for="profection">Profession </label>
-            <input id="Profection" type="text" name="profection" value="{{user.profession}}"/>
+            <label for="Address">Secondary Number</label>
+            <input id="Profection" type="text" name="secondnumb" />
          </div>
 
-         <div class="form-item form-item5">
-            <label for="height">Height</label>
-            <input id="height" type="number" name="height" value="0" />
+         <div class="form-item form-item5 ml-5">
+            <label for="height">Profile</label>
+            <input id="height" type="file" name="propic">
          </div>
-         <div class="form-item form-item4">
-            <label for="weight">Weight</label>
-            <input id="weight" type="number" value="0" name="weight" />
-         </div>
-         <div class="form-item form-item5">
-            <label for="interests">Interests</label>
-            <input id="interests" type="text" name="interests" />
-         </div>
-         <div class="form-item form-item5">
-            <label for="hobbies">Hobbies</label>
-            <input id="hobbies" type="text" name="hobbies" />
-         </div>
-
-         <div class="form-item form-item6">
-            <label for="passions">Passions</label>
-            <input id="passions" type="text" name="passions" />
-         </div>
-
-        <div class="form-item form-item6">
-            <label for="goals">Goals</label>
-            <input id="goals" type="text" name="goals" />
-         </div>
-
-
-         <div class="form-item form-item7">
-            <label for="achievements">Achievements</label>
-            <input id="achievements" type="text" name="achievements" />
-         </div>
-         <div class="form-item form-item7">
-            <label for="social_media_links">Social Media Links</label>
-            <input id="social_media_links" type="text" name="social_media_links" />
-         </div>
-         <div class="form-item form-item8">
-            <label for="skills">Skills</label>
-            <input id="skills" type="text" name="skills" />
-         </div>
-
-         <div class="form-item form-item8">
-            <label for="awards">Awards</label>
-            <input id="awards" type="text" name="awards" />
-         </div>
-
-      <div class="textarea-div form-item9">
-        <label for="message">More About You</label>
-        <textarea id="message" type="text" name="message" placeholder="What about you ?"></textarea>
-      </div>
+         <div class="textarea-div form-item9">
+          <label for="message"><Address></Address></label>
+          <textarea id="message" type="text" name="address" placeholder="Address"></textarea>
+        </div>
+         
       <div class="btn-container">
         <input id="submit" class="btn btn-glow form-btn" type="submit" name="submit" value="Submit" />
       </div>
-    </>
+    </div>
   </form>
 </section>
-
+{% endblock %}
 
 
 

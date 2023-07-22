@@ -37,9 +37,10 @@ def login_main(request):
     if request.method == 'POST':
         username  = request.POST['username']
         password = request.POST['password']
+        print(username)
         user = authenticate(username=username, password=password)
-        if user is not None:
-            return redirect('user_type')
+        if user is None:
+            return redirect('login_main')
         
         if User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user1").exists():
 
@@ -57,10 +58,10 @@ def login_main(request):
         elif User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user2").exists():
             member = User_Registration.objects.get(username=request.POST['username'],password=request.POST['password'])
             request.session['userid'] = member.id
-            # if Profile_artist.objects.filter(user_id=member.id).exists():
-            #     return redirect('user_type')
-            # else:
-            return redirect('user_home')
+            if Profile_User.objects.filter(user_id=member.id).exists():
+                return redirect('user_home')
+            else:
+                return redirect('profile_user_creation')
         else:
             messages.error(request, 'Invalid username or password')
     return render(request,'index/login.html')
@@ -128,7 +129,7 @@ def resetPassword(request):
     else:
         return render(request,'index/forget-password/resetPassword.html')
 
-############################################################# <<<<<<<<<< CREATOR MODULE >>>>>>>>>>>>>>
+############################################################# <<<<<<<<<< STAFF MODULE >>>>>>>>>>>>>>
 
 def staff_validate(request):
     return render(request, 'staff/staff_validate.html')
@@ -197,11 +198,28 @@ def index_creator_confirmation(request,user_id):
 
 def staff_home(request):
     return render(request, 'staff/staff_home.html')
-#######################################logout################### <<<<<<<<<< ARTIST MODULE >>>>>>>>>>>>>>>>
+#######################################logout################### <<<<<<<<<< USER MODULE >>>>>>>>>>>>>>>>
 
+def user_base(request):
+    ids=request.session['userid']
+    usr=Profile_User.objects.get(user=ids)
+    context={
+        'user':usr
+    }
+    return render(request, 'user/user_base.html',context)
 
 def user_home(request):
-    return render(request, 'user/user_home.html')
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
+    ids=request.session['userid']
+    usr=Profile_User.objects.get(user=ids)
+    context={
+        'user':usr
+    }
+    return render(request, 'user/user_home.html',context)
+
 def artist_registration(request):
 
     if request.method =='POST':
@@ -245,6 +263,46 @@ def index_artist_confirmation(request,user_id):
             return redirect('index_artist_confirmation', user_id=user_id)
 
     return render(request,'index\index_user\index_artist_confirmation.html',{'user_id':user_id})
+
+def profile_user_creation(request):
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    if request.method =="POST":
+        
+        firstname = request.POST.get('firstname',None)
+        lastname = request.POST.get('lastname',None)
+        phonenumber = request.POST.get('phonenumber',None)
+        email = request.POST.get('email',None)
+        gender = request.POST.get('gender',None)
+        address = request.POST.get('address',None)
+        date_of_birth= request.POST.get('date_of_birth',None)
+        pro_pics = request.FILES.get('propic',None)
+        secondnumb = request.POST.get('secondnumb',None)
+        profile_artist = Profile_User(
+            firstname=firstname,
+            lastname=lastname,
+            phonenumber=phonenumber,
+            email=email,
+            gender=gender,
+            date_of_birth=date_of_birth,
+            address=address,
+            pro_pic=pro_pics,
+            user=usr,
+            secondnumber=secondnumb
+        )
+        profile_artist.save()
+
+
+        return redirect('user_home')
+    context={
+        'user':usr
+    }
+    return render(request,'index\index_user\profile_user_creation.html', context)
+
 
 def logout(request):
     if 'userid' in request.session:  
