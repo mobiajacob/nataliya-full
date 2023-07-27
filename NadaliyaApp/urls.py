@@ -26,5 +26,7 @@ urlpatterns = [
     
     path('user_home/',views.user_home,name='user_home'),
 
+    path('home/',views.home,name='home'),
+
     
     ]

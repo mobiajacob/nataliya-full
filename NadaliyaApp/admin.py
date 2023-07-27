@@ -4,3 +4,7 @@ from .models import *
 
 admin.site.register(User_Registration)
 # Register your models here.
+
+admin.site.register(bannerads)
+
+

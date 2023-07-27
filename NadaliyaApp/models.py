@@ -44,3 +44,20 @@ class Profile_User(models.Model):
     
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
+    
+
+class bannerads(models.Model):
+    banner_image1=models.FileField(upload_to='images/banner',blank=True,null=True)
+    banner_image2=models.FileField(upload_to='images/banner',blank=True,null=True)
+    banner_image3=models.FileField(upload_to='images/banner',blank=True,null=True)
+    banner_image4=models.FileField(upload_to='images/banner',blank=True,null=True)
+    banner_image5=models.FileField(upload_to='images/banner',blank=True,null=True)
+    banner_title1 = models.CharField(max_length=255,blank=True,null=True)
+    banner_title2 = models.CharField(max_length=255,blank=True,null=True)
+    banner_title3 = models.CharField(max_length=255,blank=True,null=True)
+    banner_title4 = models.CharField(max_length=255,blank=True,null=True)
+    banner_title5 = models.CharField(max_length=255,blank=True,null=True)
+    # product_image1=models.FileField(upload_to='images/banner',blank=True,null=True)
+
+
+    

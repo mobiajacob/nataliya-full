@@ -39,7 +39,7 @@ def login_main(request):
         password = request.POST['password']
         print(username)
         user = authenticate(username=username, password=password)
-        if user is None:
+        if user is not None:
             return redirect('login_main')
         
         if User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user1").exists():
@@ -57,6 +57,7 @@ def login_main(request):
 
         elif User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user2").exists():
             member = User_Registration.objects.get(username=request.POST['username'],password=request.POST['password'])
+            print("haiii")
             request.session['userid'] = member.id
             if Profile_User.objects.filter(user_id=member.id).exists():
                 return redirect('user_home')
@@ -310,3 +311,13 @@ def logout(request):
         return redirect('/')
     else:
         return redirect('/')
+    
+
+def home(request):
+       
+    all_images = bannerads.objects.all().last()
+    
+    return render(request, 'user\home.html', {'image': all_images})
+
+    
+
